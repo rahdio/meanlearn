@@ -1,0 +1,9 @@
+{
+	"name": "MEANtastic",
+	"version": "1.0.0",
+	"dependencies": {
+		"express": "latest",
+		"bower": "latest",
+		"gulp": "latest"
+	}
+}
