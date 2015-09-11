@@ -10,8 +10,6 @@ module.exports.output = function(req, res){
 	response += "<br />";
 	response += "<b>PUT /posts/id		</b><br />- replaces content of blogpost with specified id"
 	response += "<br />";
-	response += "<b>DELETE /posts		</b><br />- deletes all blogposts"		// not right??
-	response += "<br />";
 	response += "<b>DELETE /posts/id		</b><br />- deletes blogpost with specified id"
 
 	res.send(response)
