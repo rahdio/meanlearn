@@ -1,9 +1,7 @@
 module.exports = function(app){
 	var logController = require('../controllers/log_controller')
-	var listController = require('../controllers/list_controller')
+	var postController = require('../controllers/post_controller')
 	
-	app.get('/posts/:id', logController, listController.output)
-	app.post('/posts/:id', logController, listController.output)
-	app.put('/posts/:id', logController, listController.output)
-	app.delete('/posts/:id', logController, listController.output)
+	app.use('/posts/:id', logController, postController.output)
+	app.use('/posts', logController, postController.output)
 }
