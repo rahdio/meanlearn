@@ -1,9 +1,11 @@
 {
-	"name": "postIT",
-	"version": "1.0.0",
-	"dependencies": {
-		"express": "latest",
-		"bower": "latest",
-		"gulp": "latest"
-	}
+  "name": "postIT",
+  "version": "1.0.0",
+  "dependencies": {
+    "body-parser": "^1.14.0",
+    "bower": "latest",
+    "express": "latest",
+    "gulp": "latest",
+    "mongoose": "^4.1.8"
+  }
 }
