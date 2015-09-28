@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "dependencies": {
     "body-parser": "^1.14.0",
+    "connect-flash": "^0.1.1",
     "express": "latest",
+    "express-session": "^1.11.3",
     "gulp": "latest",
+    "jade": "^1.11.0",
     "mongoose": "^4.1.8",
     "passport": "^0.3.0",
     "passport-local": "^1.0.0"

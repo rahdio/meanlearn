@@ -1,0 +1,22 @@
+html
+	head
+		title=title
+		link(href="http://getbootstrap.com/dist/css/bootstrap.min.css",
+		rel="stylesheet")
+		link(href="http://getbootstrap.com/examples/signin/signin.css",
+		rel="styleshhet")
+
+	body
+		for i in messages
+			div.flash=messages[i]
+
+		div.container
+			form(class='form-signin', action='/login', method='post')
+				h2(class='form-signin-heading text-center') Open, says me
+				label.sr-only(for='username') Username
+				input.form-control(type='text', name='username', id='username', placeholder='Username', required, autofocus)
+
+				label.sr-only(for='password') Password
+				input.form-control(type='password', name='password', id='password', placeholder='Password')
+
+				button(class='btn btn-lg btn-primary btn-block', type='submit') Login

@@ -1,0 +1,11 @@
+html
+head
+	title=title
+	body
+		h1=title
+		if (user)
+			h2 Hello =user
+			a(href='/logout') Logout
+		else
+			a(href='/register') Register
+			a(href='/login') Login
