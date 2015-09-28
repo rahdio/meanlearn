@@ -4,5 +4,5 @@ require('../app/models/blogpost.js')
 
 module.exports = function(){
 	var mongoose = require('mongoose')
-	return mongoose.connnect(constants.dbURL);		// return database reference/object
+	return mongoose.connect(constants.dbURL);		// return database reference/object
 }
