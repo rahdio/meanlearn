@@ -1,29 +1,49 @@
 var mongoose = require('mongoose')
 var Blogpost = mongoose.model('Blogpost')
 
+var errorMessage = function(err){
+	for (var error in err.errors){
+		if (err.errors[error].message) 		// get first non-null error message
+			return err.errors[error].message
+	}	
+}
+
 module.exports.create = function(req, res, next){
 	var blogpost = new Blogpost(req.body)
-	
+	blogpost.creator = req.user
 	blogpost.save(function(err){
-		if (err)  return next(err)
-		else	  res.json(blogpost)
+		if (err){
+			var body = { message: errorMessage(err)}
+			return res.status(400).send(body)
+		}
+		else{
+			var body = { message: "Blogpost successfully created."}
+			return res.status(200).send(body)
+		}	
 	})
 }
 
 module.exports.list = function(req, res, next){
-	Blogpost.find({}, function(err, posts){
-		if (err) return next(err)
-		else	 res.json(posts)
+	// sort by datecreated in descending order and add firstname and username fields to author-property object
+	Blogspot.find().sort('-dateCreated').populate('author','firstName username').exec(function(err, blogposts){
+		if (err){
+			var body = { message: errorMessage(err)}
+			return res.status(400).send(body)	
+		}else{
+			res.json(blogposts)
+		}
 	})
 }
 
 module.exports.filterByID = function(req, res, next, id){
-	Blogpost.findOne({_id: id}, function(err, postData){
+	// find post with id and store in request object for use in next middleware function
+	Blogpost.findById(id).populate('author', 'firstName username').exec(function(err, postData){
 		if (err) return next(err)
-		else{
-			req.postData = postData
-			next()
-		}
+
+		if (!postData) return next(new Error("POST_WITH_ID_NOT_FOUND: "+id))
+
+		req.postData = postData
+		next()
 	})
 }
 
@@ -32,15 +52,34 @@ module.exports.readPost = function(req, res){
 }
 
 module.exports.updatePost = function(req, res, next){
-	Blogpost.findByIdAndUpdate(req.postData.id, req.body, function(err, postData){
-		if (err) return next(err)
-		else	 res.json(postData)
+	// update editable parts of blogpost
+	var blogpost = req.blogpost
+	if (req.body.title) blogpost.title = req.body.title
+	if (req.body.description) blogpost.description = req.body.description
+	if (req.body.fullpost) blogpost.fullpost = req.body.fullpost
+
+	blogpost.save(function(err){
+		if (err){
+			var body = { message: errorMessage(err) }
+			return res.status(400).send(body)
+		}else
+			res.json(blogpost)
 	})
 }
 
 module.exports.deletePost = function(req, res, next){
 	req.postData.remove(function(err){
-		if (err) return next(err)
-		else	 return res.json(req.postData)
+		if (err){
+			var body = { message: errorMessage(err)}
+			return res.status(400).send(body)
+		}else
+			return res.json(req.postData)
 	})
+}
+
+module.exports.authorized = function(req,res, next){
+	if (req.postData.creator.id !== req.user.id){
+		var body = { message: "USER_UNAUTHORIZED"}
+			return res.status(400).send(body)
+	}
 }

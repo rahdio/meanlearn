@@ -4,7 +4,8 @@ var crypto = require('crypto')
 var md5 = crypto.createHash('md5')
 
 var UserSchema = new Schema({
-	name: String,
+	firstName: String,
+	lastName: String,
 	email: {
 		type: String,
 		unique: true

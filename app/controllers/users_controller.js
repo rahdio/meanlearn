@@ -108,3 +108,11 @@ module.exports.deleteUser = function(req, res, next){
 		else	res.json(req.user)
 	})
 }
+
+module.exports.checkLogin = function(req, res, next){
+	if (!req.isAuthenticated()){
+		var body = { message: "AUTHENTICATION_REQUIRED"}
+		return res.status(401).send(body)
+	}
+	next();
+}

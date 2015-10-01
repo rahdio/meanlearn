@@ -5,7 +5,10 @@ head
 		h1=title
 		if (user)
 			h2 Hello =user
+			a(href='/create_post') Create New Post
+			br
 			a(href='/logout') Logout
 		else
 			a(href='/register') Register
+			br
 			a(href='/login') Login
