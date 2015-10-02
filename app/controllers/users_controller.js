@@ -19,6 +19,7 @@ var getErrorMessage = function(err){
 				message = err.errors[errName].message
 		}
 	}
+	return message;
 }
 
 module.exports.renderLogin = function(req, res, next){
@@ -54,6 +55,7 @@ module.exports.register = function(req, res,next){
 
 			req.login(user, function(err){
 				if (err) return next(err)
+				req.user = user
 				return res.redirect('/')
 			})
 		})

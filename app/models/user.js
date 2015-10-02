@@ -1,7 +1,6 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 var crypto = require('crypto')
-var md5 = crypto.createHash('md5')
 
 var UserSchema = new Schema({
 	firstName: String,
@@ -22,11 +21,13 @@ var UserSchema = new Schema({
 })
 
 UserSchema.pre('save', function(next){
+	var md5 = crypto.createHash('md5')
 	this.password = md5.update(this.password).digest("hex")
 	next()
 })
 
 UserSchema.methods.authenticate = function(password){
-	return this.password === md5.update(this.password).digest("hex")
+	var md5 = crypto.createHash('md5')
+	return this.password === md5.update(password).digest("hex")
 }
 mongoose.model('User', UserSchema);

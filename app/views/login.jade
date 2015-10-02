@@ -7,16 +7,20 @@ html
 		rel="styleshhet")
 
 	body
-		for oi in messages
-			div.flash=messages[i]
-
 		div.container
 			form(class='form-signin', action='/login', method='post')
-				h2(class='form-signin-heading text-center') Open, says me
+				h2(class='form-signin-heading text-center') Login
+
 				label.sr-only(for='username') Username
 				input.form-control(type='text', name='username', id='username', placeholder='Username', required, autofocus)
+				br
 
 				label.sr-only(for='password') Password
 				input.form-control(type='password', name='password', id='password', placeholder='Password')
+				br
 
 				button(class='btn btn-lg btn-primary btn-block', type='submit') Login
+
+		br
+		
+		p(class='form-signin-heading text-center')=messages

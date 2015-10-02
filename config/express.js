@@ -4,6 +4,7 @@ var bodyparser = require('body-parser')
 var flash = require('connect-flash')
 var session = require('express-session')
 var passport = require('passport')
+require('./passport')()
 
 module.exports = function(){
 	app.use(bodyparser.urlencoded({extended: true}))
@@ -11,14 +12,15 @@ module.exports = function(){
 	app.set('views', './app/views')
 	app.set('view engine', 'jade')
 	app.use(flash())
-	app.use(passport.initialize())
-	app.use(passport.session())
 
 	app.use(session({
 	    saveUninitialized: true,
 	    resave: true,
 		secret: 'SecretCookieSecret'
 	}));
+	
+	app.use(passport.initialize())
+	app.use(passport.session())
 	
 	require('../app/routes/index_route.js')(app)
 	require('../app/routes/create_route')(app)
