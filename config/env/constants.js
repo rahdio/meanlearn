@@ -1,4 +1,4 @@
 module.exports = {
 	port: 80,
-	dbURL: 'mongodb://localhost/posts' 
+	dbURL: 'mongodb://admin:admin@ds041623.mongolab.com:41623/prework' 
 }
