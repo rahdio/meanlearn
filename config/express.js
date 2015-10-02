@@ -21,10 +21,9 @@ module.exports = function(){
 	
 	app.use(passport.initialize())
 	app.use(passport.session())
-	
+
 	require('../app/routes/index_route.js')(app)
 	require('../app/routes/create_route')(app)
-	require('../app/routes/posts_route')(app)
 	require('../app/routes/users_route')(app)
 	require('../app/routes/blogposts_route')(app)
 

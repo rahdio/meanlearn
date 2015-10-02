@@ -1,0 +1,31 @@
+html
+	head
+		title=title
+		link(href="http://getbootstrap.com/dist/css/bootstrap.min.css",
+		rel="stylesheet")
+		link(href="http://getbootstrap.com/examples/signin/signin.css",
+		rel="styleshhet")
+
+	body
+		div.container
+			form(class='form-signin', action='/blogposts/#{data.id}', method='put')
+				h2(class='form-signin-heading text-center')=data.title
+				br
+				br
+
+				label.sr-only(for='title') Title
+				input.form-control(type='text', name='title', id='title', placeholder='Title', required, autofocus value="#{data.title}")
+				br
+
+				label.sr-only(for='description') Description
+				textarea.form-control(type='text', name='description', id='description', placeholder='Description', required, autofocus)=data.description
+				br
+
+				label.sr-only(for='fullpost') Full Post
+				textarea.form-control(type='text', name='fullpost', id='fullpost', style="height: 40%", placeholder='Full Post', required, autofocus)=data.fullpost
+				br
+
+				a(class='btn btn-lg btn-primary btn-block', href='/blogposts')  Back To List
+		br
+
+		p(class='form-signin-heading text-center')=messages

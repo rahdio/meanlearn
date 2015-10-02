@@ -1,6 +1,8 @@
+var users = require('../controllers/users_controller.js')
+var blogposts = require('../controllers/blogposts_controller.js')
+
 module.exports = function(app){
-	var logController = require('../controllers/log_controller')
 	var createController = require('../controllers/create_controller')
-	
-	app.get('/create', logController, createController.output)
+
+	app.get('/create', users.checkLogin, createController.render)
 }

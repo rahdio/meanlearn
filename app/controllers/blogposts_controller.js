@@ -25,12 +25,13 @@ module.exports.create = function(req, res, next){
 
 module.exports.list = function(req, res, next){
 	// sort by datecreated in descending order and add firstname and username fields to author-property object
-	Blogspot.find().sort('-dateCreated').populate('author','firstName username').exec(function(err, blogposts){
+	Blogpost.find().sort('-dateCreated').populate('author','firstName username').exec(function(err, blogposts){
 		if (err){
 			var body = { message: errorMessage(err)}
 			return res.status(400).send(body)	
 		}else{
-			res.json(blogposts)
+			req.postData = blogposts
+			next()
 		}
 	})
 }
@@ -82,4 +83,18 @@ module.exports.authorized = function(req,res, next){
 		var body = { message: "USER_UNAUTHORIZED"}
 			return res.status(400).send(body)
 	}
+}
+
+module.exports.render = function(req, res, next){
+	res.render('blogposts', {
+		title: 'List of Posts',
+		data: req.postData
+	})
+}
+
+module.exports.renderById = function(req, res, next){
+	res.render('blogpost_id', {
+		title: req.postData.title,
+		data: req.postData
+	})
 }

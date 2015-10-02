@@ -8,30 +8,24 @@ html
 
 	body
 		div.container
-			form(class='form-signin', action='/register', method='post')
+			form(class='form-signin', action='/blogposts', method='post')
 				h2(class='form-signin-heading text-center') Create New Blogpost
-
-				label.sr-only(for='username') Username
-				input.form-control(type='text', name='username', id='username', placeholder='Username', required, autofocus)
+				br
 				br
 
-				label.sr-only(for='firstName') First Name
-				input.form-control(type='text', name='firstName', id='firstName', placeholder='First Name', required, autofocus)
+				label.sr-only(for='title') Title
+				input.form-control(type='text', name='title', id='title', placeholder='Title', required, autofocus)
 				br
 
-				label.sr-only(for='lastName') Last Name
-				input.form-control(type='text', name='lastName', id='lastName', placeholder='Last Name', required, autofocus)
+				label.sr-only(for='description') Description
+				textarea.form-control(type='text', name='description', id='description', placeholder='Description', required, autofocus)
 				br
 
-				label.sr-only(for='email') E-mail
-				input.form-control(type='email', name='email', id='email', placeholder='E-mail', required)
+				label.sr-only(for='fullpost') Full Post
+				textarea.form-control(type='text', name='fullpost', id='fullpost', style="height: 40%", placeholder='Full Post', required, autofocus)
 				br
 
-				label.sr-only(for='password') Password
-				input.form-control(type='password', name='password', id='password', placeholder='Password')
-				br
-
-				button(class='btn btn-lg btn-primary btn-block', type='submit') Register
+				button(class='btn btn-lg btn-primary btn-block', type='submit') Create
 		br
 
 		p(class='form-signin-heading text-center')=messages

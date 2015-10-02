@@ -1,0 +1,16 @@
+html
+	head
+		title=title
+		link(href="http://getbootstrap.com/dist/css/bootstrap.min.css",
+		rel="stylesheet")
+		link(href="http://getbootstrap.com/examples/signin/signin.css",
+		rel="styleshhet")
+
+	body
+		h2(class='form-signin-heading text-center')=title
+		br
+		br
+
+		if (data)
+			for i in data
+				a(class='btn btn-lg btn-primary btn-block', href='/blogposts/'+i.id)=i.title
