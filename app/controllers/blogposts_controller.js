@@ -17,8 +17,9 @@ module.exports.create = function(req, res, next){
 			return res.status(400).send(body)
 		}
 		else{
-			var body = { message: "Blogpost successfully created."}
-			return res.status(200).send(body)
+			req.flash('error', 'Post Created Successfully')
+			res.redirect('/blogposts')
+			return
 		}	
 	})
 }
@@ -88,6 +89,7 @@ module.exports.authorized = function(req,res, next){
 module.exports.render = function(req, res, next){
 	res.render('blogposts', {
 		title: 'List of Posts',
+		messages: req.flash('error'),
 		data: req.postData
 	})
 }
